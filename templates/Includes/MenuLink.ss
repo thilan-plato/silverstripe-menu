@@ -1,10 +1,10 @@
-<% if LinkURL %>
+<% if $LinkURL %>
     <a href="{$LinkURL}"{$TargetAttr}{$ClassAttr}>
         {$Title}
     </a>
-    <% if Children %>
+    <% if $Children %>
         <ul>
-            <% loop Children %>
+            <% loop $Children %>
                 <li>
                     {$Me}
                 </li>

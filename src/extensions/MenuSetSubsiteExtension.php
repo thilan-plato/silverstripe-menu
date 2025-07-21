@@ -19,9 +19,9 @@ class MenuSetSubsiteExtension extends DataExtension
      * Has_one relationship
      * @var array
      */
-    private static $has_one = array(
+    private static $has_one = [
         'Subsite' => Subsite::class
-    );
+    ];
 
     /**
      * Update Fields

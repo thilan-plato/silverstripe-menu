@@ -208,7 +208,7 @@ class MenuSet extends DataObject implements PermissionProvider
     public function requireDefaultRecords()
     {
         parent::requireDefaultRecords();
-        $default_menu_sets = $this->config()->get('sets') ?: array();
+        $default_menu_sets = $this->config()->get('sets') ?: [];
         foreach ($default_menu_sets as $slug => $options) {
             if (is_array($options)) {
                 $title = $options['title'];

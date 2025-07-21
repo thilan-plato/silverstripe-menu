@@ -1,6 +1,6 @@
 {
   "name": "gorriecoe/silverstripe-menu",
-  "description": "Adds multiple menus that are defined via yml and managed via the cms.",
+  "description": "Adds multiple menus that are defined via yml and managed via the cms. Compatible with Silverstripe 4.x and 5.x.",
   "type": "silverstripe-vendormodule",
   "license": "BSD-3-Clause",
   "authors": [
@@ -18,12 +18,23 @@
   ],
   "homepage": "http://github.com/gorriecoe/silverstripe-menu",
   "require": {
-    "silverstripe/admin": "^1.0",
-    "silverstripe/graphql": "^4.0.0",
-    "symbiote/silverstripe-gridfieldextensions": "^3.1",
-    "gorriecoe/silverstripe-link": "^1.1"
+    "silverstripe/framework": "^4.0|^5.0",
+    "silverstripe/admin": "^1.0|^2.0",
+    "silverstripe/graphql": "^4.0.0|^5.0.0",
+    "symbiote/silverstripe-gridfieldextensions": "^3.1|^4.0",
+    "gorriecoe/silverstripe-link": "^1.1|^2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0|^10.0"
   },
   "extra": {
     "installer-name": "menu"
-  }
+  },
+  "autoload": {
+    "psr-4": {
+      "gorriecoe\\Menu\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

@@ -222,10 +222,10 @@ class MenuLink extends Link
     /**
      * Return the first menulink matching the given MenuSet and SiteTreeID.
      *
-     * @param gorriecoe\Menu\Models\MenuSet|String
-     * @param Int
+     * @param gorriecoe\Menu\Models\MenuSet|String $menuSet
+     * @param int $siteTreeID
      *
-     * @return gorriecoe\Menu\Models\MenuLink|Null
+     * @return gorriecoe\Menu\Models\MenuLink|null
      */
     public static function get_by_sitetreeID($menuSet, int $siteTreeID)
     {
@@ -233,7 +233,7 @@ class MenuLink extends Link
             $menuSet = MenuSet::get_by_slug($menuSet);
         }
         if (!$menuSet) {
-            return;
+            return null;
         }
         return DataObject::get_one(self::class, [
             'Type'       => 'SiteTree', // Ensures the admin hasn't intentionally changed this link

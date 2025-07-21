@@ -1,0 +1,20 @@
+---
+Name: samplemenus
+---
+# Sample menu configuration
+# Copy this to your project's _config/menus.yml and customize as needed
+
+gorriecoe\Menu\Models\MenuSet:
+  sets:
+    main:
+      title: 'Main Navigation'
+      allow_children: true
+    footer:
+      title: 'Footer Links'
+      allow_children: false
+    sidebar:
+      title: 'Sidebar Menu'
+      allow_children: true
+    mobile:
+      title: 'Mobile Menu'
+      allow_children: true 

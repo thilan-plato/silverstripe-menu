@@ -23,7 +23,7 @@ class SiteTreeAutoCreateExtension extends DataExtension
     public function getOwnsMenu()
     {
         $owner = $this->owner;
-        $owns = $owner->config()->get('owns_menu') ? : [];
+        $owns = $owner->config()->get('owns_menu') ?: [];
         $menuSets = ArrayList::create();
 
         foreach ($owns as $key => $slug) {

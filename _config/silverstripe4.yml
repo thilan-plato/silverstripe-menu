@@ -1,0 +1,13 @@
+---
+Name: silverstripe4menuconfig
+Only:
+  silverstripeversion: '^4.0'
+---
+# Silverstripe 4 specific configuration
+
+# GraphQL configuration for Silverstripe 4
+SilverStripe\GraphQL\Controller:
+  schema:
+    scaffolding_providers:
+      - gorriecoe\Menu\Models\MenuSet
+      - gorriecoe\Menu\Models\MenuLink 

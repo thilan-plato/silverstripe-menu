@@ -1,73 +1,106 @@
-# Silverstripe menus
+# Silverstripe Menu Module
 
 Adds multiple menus that are defined via yml and managed via the cms.
 
+## Requirements
+
+- Silverstripe 4.x or 5.x
+- PHP 7.4+
+
 ## Installation
-Composer is the recommended way of installing SilverStripe modules.
-```
+
+```bash
 composer require gorriecoe/silverstripe-menu
 ```
 
-## Requirements
+## Configuration
 
-- silverstripe/framework ^4.0
-- symbiote/silverstripe-gridfieldextensions ^3.1
-- [gorriecoe/silverstripe link](https://github.com/gorriecoe/silverstripe-link) ^1.1
+### Silverstripe 4.x
 
-## Maintainers
+The module will automatically use Silverstripe 4.x compatible configurations.
 
-- [Gorrie Coe](https://github.com/gorriecoe)
+### Silverstripe 5.x
 
-## Creating custom menus
+The module will automatically use Silverstripe 5.x compatible configurations.
 
-As it is common to reference MenuSets by slug in templates, you can configure sets to be created automatically during the /dev/build task. These sets cannot be deleted through the CMS.
+### Menu Configuration
 
-```
+Define your menus in your `_config/menus.yml` file:
+
+```yaml
 gorriecoe\Menu\Models\MenuSet:
   sets:
-    main: Main menu
-    secondary: Another menu
-```
-
-## Nested and flat menus
-
-By default menus will be flat, which means links can not have child links associated with them.  If you need a nested menu structure, you can do so by adding `allow_children: true` to the yml file as shown below.
-
-```
-gorriecoe\Menu\Models\MenuSet:
-  sets:
+    main:
+      title: 'Main Menu'
+      allow_children: true
     footer:
-      title: Footer menu
+      title: 'Footer Menu'
+      allow_children: false
+    sidebar:
+      title: 'Sidebar Menu'
       allow_children: true
 ```
 
-## Adding links to menus
+### Page Integration
 
-Once you have created your menus you can add links in the admin area.  The fields are inherited from [silverstripe link](https://github.com/gorriecoe/silverstripe-link).
+To automatically create menu links when pages are published, add this to your Page class:
 
-## Automatically add links from sitetree to specific menus
-
-If you need to automatically add links to a menu after the creation of a page, you can do so by adding the following extension to page and defining `owns_menu`.
-
-```
-Page:
-  extensions:
-    - gorriecoe\Menu\Extensions\SiteTreeAutoCreateExtension
-  owns_menu:
-    - main
-    - footer
+```php
+class Page extends SiteTree
+{
+    private static $owns_menu = [
+        'main',
+        'footer'
+    ];
+}
 ```
 
-## Usage in template
+## Usage
 
-```
-<ul>
-    <% loop MenuSet('footer') %>
-        <li>
-            {$Me}
-        </li>
-    <% end_loop %>
-</ul>
+### In Templates
+
+```ss
+<% loop $MenuSet('main') %>
+    <li>
+        <a href="{$LinkURL}">{$Title}</a>
+        <% if $Children %>
+            <ul>
+                <% loop $Children %>
+                    <li><a href="{$LinkURL}">{$Title}</a></li>
+                <% end_loop %>
+            </ul>
+        <% end_if %>
+    </li>
+<% end_loop %>
 ```
 
-See [silverstripe link](https://github.com/gorriecoe/silverstripe-link#template-options) for more template options.
+### In PHP
+
+```php
+use gorriecoe\Menu\Models\MenuSet;
+
+$menuSet = MenuSet::get_by_slug('main');
+$links = $menuSet->Links();
+```
+
+## Features
+
+- Multiple menu support
+- Hierarchical menu structure
+- CMS management interface
+- Automatic menu link creation
+- GraphQL API support
+- Subsite support (if subsites module is installed)
+
+## Compatibility
+
+This module is compatible with:
+- Silverstripe 4.x
+- Silverstripe 5.x
+- PHP 7.4+
+- PHP 8.0+
+- PHP 8.1+
+
+## License
+
+BSD-3-Clause
