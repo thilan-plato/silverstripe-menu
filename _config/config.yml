@@ -1,32 +1,13 @@
 ---
 Name: menuconfig
+Only:
+  moduleexists: silverstripe/subsite
 ---
-# Template provider registration (works for both SS4 and SS5)
-SilverStripe\View\TemplateGlobalProvider:
-  providers:
-    - gorriecoe\Menu\View\MenuManagerTemplateProvider
-
-# GraphQL configuration that works for both SS4 and SS5
-SilverStripe\GraphQL\Controller:
-  schema:
-    scaffolding_providers:
-      - gorriecoe\Menu\Models\MenuSet
-      - gorriecoe\Menu\Models\MenuLink
-
-# SilverStripe 5 specific GraphQL configuration (will only apply if SS5 is detected)
-SilverStripe\GraphQL\Schema\Schema:
-  schemas:
-    default:
-      scaffolding_providers:
-        - gorriecoe\Menu\Models\MenuSet
-        - gorriecoe\Menu\Models\MenuLink
-
-# Module manifest configuration for SS5
-SilverStripe\Core\Manifest\ModuleManifest:
-  project:
-    - menu
-
-# Subsite extension (only applies if subsite module exists)
 gorriecoe\Menu\Models\MenuSet:
   extensions:
     - gorriecoe\Menu\Extensions\MenuSetSubsiteExtension
+---
+# Template provider registration
+SilverStripe\View\TemplateGlobalProvider:
+  providers:
+    - gorriecoe\Menu\View\MenuManagerTemplateProvider
