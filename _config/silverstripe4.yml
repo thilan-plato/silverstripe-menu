@@ -1,7 +1,5 @@
 ---
 Name: silverstripe4menuconfig
-Only:
-  silverstripeversion: '^4.0'
 ---
 # Silverstripe 4 specific configuration
 
